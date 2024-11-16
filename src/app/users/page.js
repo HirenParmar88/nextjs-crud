@@ -14,6 +14,10 @@ function AddUserPage(){
   const [page, setPage]= useState(1);
   const [limit, setLimit]=useState(10);
 
+  //edit user to use this
+  // const [userName, setUserName] = useState("");
+  // const [userEmail, setUserEmail] = useState("");
+
   useEffect(() => {
     getUser(page, limit);
     
@@ -51,7 +55,7 @@ function AddUserPage(){
       <h2 className='text-center mb-4 mt-2'>Add User </h2>
       <AddUser getUser={getUser}/>
       <Pagination onPageChange={handlePageChange}/>
-      <ShowUser users={users} />
+      <ShowUser users={users} getUser={getUser} />
       <BtnHome />
     </div>
     </>

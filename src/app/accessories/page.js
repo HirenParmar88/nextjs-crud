@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function AddAssessoryPage(){
-  const [assessory, setAssessory]=useState([]);
+  const [accessories, setAssessory]=useState([]);
   const [loading, setLoading]= useState(false);
   const [page, setPage]= useState(1);
   const [limit, setLimit]=useState(10);
@@ -21,15 +21,17 @@ function AddAssessoryPage(){
     }
   },[page,limit])
 
-  //GET Assessory
+  //GET APIs for Assessory
   const getAssessory = async (page, limit)=> {
+    console.log('get accessories calling...')
     setLoading(true);
+    
     try{
     const res = await axios({
       url: `http://localhost:5000/accessories?page=${page}&limit=${limit}`,
       method: 'get',
     })
-    console.log("res ", res.data)
+    //console.log("res ", res.data)
     console.log(res.data)
     setAssessory(res.data.accessories)
   }catch(err){
@@ -44,14 +46,14 @@ function AddAssessoryPage(){
     setPage(newPage);
     setLimit(newLimit);
   }
-  console.log({assessory})
+
   return(
     <>
     <div>
       <h2 className='text-center mb-4 mt-2'>Add Assessory Form </h2>
       <AddAssessory getAssessory={getAssessory}/>
       <Pagination onPageChange={handlePageChange}/>
-      <ShowAssessory assessory={assessory}/>
+      <ShowAssessory accessories={accessories} getAccessory={getAssessory}/>
       <BtnHome />
     </div>
     </>

@@ -49,7 +49,7 @@ function AddProductPage(  ){
       <h2 className='text-center mb-4 mt-2'>Add Product </h2>
       <AddProduct getProduct={getProduct} />
       <Pagination onPageChange={handlePageChange}/>
-      <ShowProduct products={products} />
+      <ShowProduct products={products} getProduct={getProduct}/>
       <BtnHome/>
     </div>
    
