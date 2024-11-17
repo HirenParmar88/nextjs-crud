@@ -6,7 +6,7 @@ import React from 'react';
 import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '@/components/navigationBar/navigationBar.jsx';
-
+import UsersSignUp from '@/components/user/userSignUp.jsx';
 export default function Dashboard() {
 
   return (
@@ -27,7 +27,7 @@ export default function Dashboard() {
         </li><br/><br/>
       </ul>
     </div>
-    
+    <UsersSignUp />
     </>
   );
 }
