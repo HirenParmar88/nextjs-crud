@@ -1,13 +1,18 @@
-//index file of the project.
-'use client'
+//this page.js file like index file of the next.js project..
 
 // src/app/page.js
+'use client'
 import React from 'react';
 import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationBar from '@/components/navigationBar/navigationBar.jsx';
 
 export default function Dashboard() {
+
   return (
+    <>
+    <NavigationBar />
+    
     <div className="container mt-5 bg-light"><br/>
       <h2>Dashboard</h2><br/>
       <ul>
@@ -22,6 +27,8 @@ export default function Dashboard() {
         </li><br/><br/>
       </ul>
     </div>
+    
+    </>
   );
 }
 
