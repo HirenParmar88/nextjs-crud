@@ -1,8 +1,7 @@
 // src/components/navigationBar/navigationBar.jsx
 
 'use client'
-import Link from "next/link";
-import UsersSignUp from "../user/userSignUp.jsx";   //components
+import Link from "next/link"; 
 
 function NavigationBar() {
 
@@ -52,12 +51,12 @@ function NavigationBar() {
           </ul>
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link" href="/usersSignUp">
+              <Link className="nav-link" href="/userSignUp">
                 <i className="fas fa-user-plus px-0"></i> Sign Up
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="#">
+              <Link className="nav-link" href="/userLogin">
                 <i className="fas fa-sign-in-alt px-0"></i> Login
               </Link>
             </li>
@@ -65,6 +64,7 @@ function NavigationBar() {
         </div>
       </div>
     </nav>
+
 
     </>
   );

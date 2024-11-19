@@ -8,7 +8,7 @@ import Pagination from '@/components/pagination/pagination.jsx';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-function AddUserPage(){
+function userSignUpAddUserPage(){
   const [users, setUsers] = useState([])  //state var
   const [loading, setLoading]= useState(false);
   const [page, setPage]= useState(1);
