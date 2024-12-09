@@ -6,19 +6,23 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { useState } from "react";
 import axios from "axios";
 import Pagination from "../pagination/pagination";
-
+  
 function AddUser(props) {
   //const [userId, setUserId] = useState('')    //state
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userJwtToken, setUserJwtToken] = useState("");
 
   //POST APIs for users
   const addUser = async (e) => {
     e.preventDefault();
     try {
       //console.log("user id ", userId)
-      console.log("user Name ", userName);
-      console.log("user Email ", userEmail);
+      console.log("user Name :", userName);
+      console.log("user Email :", userEmail);
+      console.log("user password :", userPassword);
+      //console.log("user jwt token :", userJwtToken);
 
       //POST Method
       const res = await axios({
@@ -27,13 +31,16 @@ function AddUser(props) {
         data: {
           username: userName,
           email: userEmail,
+          password: userPassword
         },
       });
       console.log("res", res.data);
       if ((res.data.success = true)) {
         //setUsers(res.data.users);
         setUserName(""), 
-        setUserEmail(""), 
+        setUserEmail(""),
+        setUserPassword(""),
+        //setUserJwtToken(""), 
         props.getUser();
         //alert("User added successfully!");
       } else {
@@ -41,7 +48,7 @@ function AddUser(props) {
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Network error: Unable to reach the server.");
+      alert(error.response.data.error);
     }
   };
 
@@ -55,6 +62,8 @@ function AddUser(props) {
   const cancelAddUser=()=>{
     setUserName(""), 
     setUserEmail(""), 
+    setUserPassword(""),
+    //setUserJwtToken(""),
     props.getUser();
   }
 
@@ -86,6 +95,30 @@ function AddUser(props) {
             />
           </td>
         </tr>
+        <tr>
+          <td>User Password</td>
+          <td>
+            <input
+              type="text"
+              name="User Password"
+              value={userPassword}
+              className="form-control"
+              onChange={(e) => setUserPassword(e.target.value)}
+            />
+          </td>
+        </tr>
+        {/* <tr className="mt-5">
+          <td>User Jwt Token</td>
+          <td>
+            <input
+              type="text"
+              name="User Jwt Token"
+              value={userJwtToken}
+              className="form-control"
+              onChange={(e) => setUserJwtToken(e.target.value)}
+            />
+          </td>
+        </tr> */}
         </thead>
 
         <tbody>
@@ -193,7 +226,7 @@ function ShowUser({ users, getUser }) {
 
   return (
     <>
-      <div className="table-responsive justify-content-around w-75">
+      <div className="table-responsive justify-content-around w-100">
         <h2 className="mb-3">Show Users Data</h2>
         <table className="table">
           <thead>
@@ -202,17 +235,21 @@ function ShowUser({ users, getUser }) {
               <th scope="col">UserId</th>
               <th scope="col">UserName</th>
               <th scope="col">UserEmail</th>
+              <th scope="col">UserPassword</th>
+              <th scope="col">UserJwtToken</th>
               <th scope="col">CreatedAt</th>
               <th scope="col">Operations</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {users?.map((user, index) => (
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
                 <td>{user.id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
+                <td>{user.password}</td>
+                <td>{user.jwtToken}</td>
                 <td>{user.createdAt}</td>
                 <td>
                   <button

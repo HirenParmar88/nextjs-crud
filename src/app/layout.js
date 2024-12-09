@@ -4,10 +4,10 @@ import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 
 // Dynamically load Bootstrap JS to avoid SSR issues
-const Bootstrap = dynamic(() => import('bootstrap/dist/js/bootstrap.bundle'), { ssr: false });
+// const Bootstrap = dynamic(() => import('bootstrap/dist/js/bootstrap.bundle'), { ssr: false });
 
 export default function RootLayout({ children }) {
-  useEffect(() => {
+  useEffect(() => {     
     import('bootstrap/dist/js/bootstrap.bundle');
   }, []);
 

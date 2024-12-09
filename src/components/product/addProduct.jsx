@@ -25,6 +25,9 @@ function AddProduct(props) {
           price: parseFloat(productPrice),
           description: productDescription,
         },
+        headers: {
+          authentication: `Bearer ${localStorage.getItem('token')}`
+        }
       });
       console.log(res.data);
       
@@ -58,6 +61,7 @@ function AddProduct(props) {
   return (
     <>
       <table className="table" style={{ maxWidth: "600px", margin: "auto" }}>
+        <thead></thead>
         <tbody>
           <tr>
             <td>Product Name</td>
@@ -109,6 +113,7 @@ function AddProduct(props) {
               </button>
             </td>
           </tr>
+
         </tbody>
       </table>
     </>
@@ -165,7 +170,7 @@ function ShowProduct({ products, getProduct }) {
           </thead>
 
           <tbody>
-            {products.map((product, index) => (
+            {products?.map((product, index) => (
               <tr key={product.id}>
                 <th scope="row">{index + 1}</th>
                 <td>{product.id}</td>
@@ -200,4 +205,5 @@ function ShowProduct({ products, getProduct }) {
     </>
   );
 }
+
 export { AddProduct, ShowProduct };

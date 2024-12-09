@@ -7,7 +7,8 @@ function NavigationBar() {
 
   return (
     <>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <Link className="navbar-brand" href="/">My Project</Link>
         <button
@@ -56,7 +57,7 @@ function NavigationBar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="/userLogin">
+              <Link className="nav-link" href="/login">
                 <i className="fas fa-sign-in-alt px-0"></i> Login
               </Link>
             </li>
@@ -64,7 +65,6 @@ function NavigationBar() {
         </div>
       </div>
     </nav>
-
 
     </>
   );
