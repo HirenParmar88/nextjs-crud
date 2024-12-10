@@ -2,13 +2,20 @@
 
 // src/app/page.js
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "@/components/navigationBar/navigationBar.jsx";
+import dynamic from "next/dynamic";
+//import LazyLoadingPage from "./lazyloading/page";
+
+// Dynamically import LazyLoadingPage
+const LazyLoadingPage = dynamic(() => import('@/app/lazyloading/page.js'), {
+  suspense: false, // Enable Suspense
+});
 
 export default function Dashboard() {
-
+  
   return (
     <>
       <NavigationBar />
@@ -51,7 +58,11 @@ export default function Dashboard() {
         </ul>
       </div>
 
-      
+      <div>
+        <Suspense fallback={<div>loading dashboard content..</div>}>
+        <LazyLoadingPage />
+        </Suspense>  
+      </div>
     </>
   );
 }
