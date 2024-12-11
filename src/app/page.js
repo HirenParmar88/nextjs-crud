@@ -7,18 +7,27 @@ import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "@/components/navigationBar/navigationBar.jsx";
 import dynamic from "next/dynamic";
-//import LazyLoadingPage from "./lazyloading/page";
+import ImgGallary from "@/components/imagegallary/ImageGallary";
+import CheckLazyLoading from "@/components/lazyloading/LazyLoading";
 
-// Dynamically import LazyLoadingPage
-const LazyLoadingPage = dynamic(() => import('@/app/lazyloading/page.js'), {
-  suspense: false, // Enable Suspense
+//check LazyLoading working or not
+const Lazy = dynamic(()=> import('@/components/lazyloading/LazyLoading'),{
+  loading: () => <div className="text-text-center">Loading ...</div>,
+  ssr: false,
+})
+
+// Dynamically import Footer component with Suspense
+const LazyFooter = dynamic(() => import("@/components/footer/Footer"), {
+  loading: () => <div className="text-center">Loading footer...</div>, // Custom loading fallback
+  ssr: false, // Disable SSR for this component to ensure it only loads client-side
 });
 
 export default function Dashboard() {
-  
   return (
     <>
       <NavigationBar />
+
+      <Lazy />
 
       <div className="container mt-5 bg-light">
         <br />
@@ -58,10 +67,16 @@ export default function Dashboard() {
         </ul>
       </div>
 
+      
+      <ImgGallary />
+      
+
       <div>
-        <Suspense fallback={<div>loading dashboard content..</div>}>
-        <LazyLoadingPage />
-        </Suspense>  
+        <Suspense
+          fallback={<div>Loading footer...</div>}
+        >
+          <LazyFooter showDate={true} />
+        </Suspense>
       </div>
     </>
   );

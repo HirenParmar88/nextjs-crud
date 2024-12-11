@@ -8,7 +8,7 @@ function NavigationBar() {
   return (
     <>
     
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg bg-secondary text-dark">
       <div className="container-fluid">
         <Link className="navbar-brand" href="/">My Project</Link>
         <button
