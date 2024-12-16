@@ -7,12 +7,14 @@ import BtnHome from "@/components/backbtn/backButton.jsx";
 import Pagination from '@/components/pagination/pagination.jsx';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { parseCookies } from 'nookies';
 
 function AddUserPage(){
   const [users, setUsers] = useState([])  //state var
   const [loading, setLoading]= useState(false);
   const [page, setPage]= useState(1);
   const [limit, setLimit]=useState(10);
+  const cookies = parseCookies()
 
   useEffect(() => {
     getUser(page, limit);
@@ -25,10 +27,15 @@ function AddUserPage(){
   //GET Users
   const getUser = async (page, limit)=> {
     setLoading(true);
+    const token = cookies.token;
     try{
     const res = await axios({
       url: `http://localhost:5000/users?page=${page}&limit=${limit}`,
       method: 'get',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": 'application/json'
+      }
     })
     console.log("res ", res.data)
     setUsers(res.data.users)

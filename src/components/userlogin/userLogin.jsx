@@ -1,25 +1,24 @@
 //src/components/userlogin/userLogin.jsx
 
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Dashboard from "@/app/page.js";
 import { redirect, useRouter } from "next/navigation"; 
+import { setCookie } from 'nookies'
 
 function LoginComponents() {
-
-  const router = useRouter(); //to define next page root
-  // setStates
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  
+
   //User Login
   const handleUserLogin = async (e) => {
     //e.preventDefault();
     console.log("Login button clicked..!!");
     console.log('username :', username);
     console.log('password :', password);
+  
     try {
       // Make a POST request to the backend API
       const res = await axios.post("http://localhost:5000/auth/login", {
@@ -28,26 +27,24 @@ function LoginComponents() {
       });
       console.log(res.data);
       // Extract the response data
-      const { success, user, message } = res.data;
 
-      if (success) {
+      if (res.data.success) {
+        //document.cookie=`username=${user.name}; path=/;`;
         console.log("Successfully logged in!");
-        console.log("User details:", user);
-        setMessage("Login successful!");
-        alert('successfully loggedIn');
-
+        console.log("User details:", res.data.user);
+       
         setUsername("");
         setPassword("");
-        localStorage.setItem('token', user.jwtToken)
+        alert('successfully loggedIn');
+        setCookie(null, "token", res.data.user.jwtToken)
+        setCookie(null, "name", res.data.user.name)
         router.push('/redirect')
       } else {
         console.log("Invalid username or password.");
-        setMessage(message || "Invalid username or password.");
         alert('Invalid username or password')
       }
     } catch (error) {
       console.error("Error logging in:", error);
-      setMessage("An error occurred while logging in.");
     }
   };
 

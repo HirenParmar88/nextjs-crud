@@ -60,3 +60,82 @@ nav a {
 nav a:hover {
   color: #1e90ff;
 }
+
+/* css loaders */
+.loader-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  border-bottom: 16px solid blue;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/* src/components/lightDarkMode/lightDarkMode.css */
+.app-container {
+  padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.app-container.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.app-container.dark {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.panel {
+  border: 1px solid currentColor;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button-light {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.button-light:hover {
+  background-color: #e0e0e0;
+}
+
+.button-dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.button-dark:hover {
+  background-color: #555;
+}

@@ -2,13 +2,13 @@
 
 // src/app/page.js
 "use client";
-import React, { Suspense } from "react";
+import React, { Suspense,useState } from "react";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "@/components/navigationBar/navigationBar.jsx";
 import dynamic from "next/dynamic";
 import ImgGallary from "@/components/imagegallary/ImageGallary";
-import CheckLazyLoading from "@/components/lazyloading/LazyLoading";
+import MyApp from "@/components/lightDarkMode/lightDarkMode";
 
 //check LazyLoading working or not
 const Lazy = dynamic(()=> import('@/components/lazyloading/LazyLoading'),{
@@ -23,12 +23,15 @@ const LazyFooter = dynamic(() => import("@/components/footer/Footer"), {
 });
 
 export default function Dashboard() {
+
   return (
     <>
       <NavigationBar />
-
+     
       <Lazy />
 
+      <MyApp />
+      
       <div className="container mt-5 bg-light">
         <br />
         <h2>Dashboard</h2>

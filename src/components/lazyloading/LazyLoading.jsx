@@ -1,16 +1,24 @@
+// src/components/lazyloading/LazyLoading.jsx
+
 'use client'
 
 import { useEffect, useState } from "react";
+import "/src/app/globals.css";
 
 function CheckLazyLoading(){
-    const  [secondParagraphVisible, setSecondParagraphVisible]= useState(false)
+    const [secondParagraphVisible, setSecondParagraphVisible]= useState(false)
+    const [loader, setLoader]= useState(true)
     
     useEffect(()=>{
         const timer = setTimeout(()=>{  
             setSecondParagraphVisible(true);
         },3000);    // 3 second delay
 
-        return()=>clearTimeout(timer);
+        const loderTime = setTimeout(()=>{  
+            setLoader(false);
+        },3000);    // 3 second delay
+
+        return()=>clearTimeout(timer,loderTime);
     },[]);
 
     return(
@@ -37,6 +45,10 @@ function CheckLazyLoading(){
                 </p>)}
                 
             </div>
+            {loader && (<div className="loader-container">
+                <div className="loader"></div>
+            </div>)}
+            
         </>
     )
 }
