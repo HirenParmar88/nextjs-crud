@@ -2,12 +2,19 @@
 
 'use client'
 import Link from "next/link"; 
+import LogoutComponent from "../logout/Logout";
+import { useEffect, useState } from "react";
+import { parseCookies } from "nookies";
 
 function NavigationBar() {
+  const [name, setName] = useState(' ');
+  useEffect(()=>{
+    const cookies = parseCookies()
+      setName(cookies.name)
+  },[]);
 
   return (
     <>
-    
       <nav className="navbar navbar-expand-lg bg-secondary text-dark">
       <div className="container-fluid">
         <Link className="navbar-brand" href="/">My Project</Link>
@@ -25,42 +32,31 @@ function NavigationBar() {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" href="/">
-                <i className="fas fa-home px-0"></i> Home
-              </Link>
-            </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Page 1
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a className="dropdown-item" href="#">Page 1-1</a></li>
-                <li><a className="dropdown-item" href="#">Page 1-2</a></li>
-                <li><a className="dropdown-item" href="#">Page 1-3</a></li>
-              </ul>
+              <Link className="nav-link" href="/users">Users</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="/page2">Page 2</Link>
+              <Link className="nav-link" href="/products">Products</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" href="/accessories">Accessory</Link>
             </li>
           </ul>
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link" href="/userSignUp">
-                <i className="fas fa-user-plus px-0"></i> Sign Up
-              </Link>
+            <li className="nav-nav-item pt-2 text-text-danger">
+              Welcome to { name }
             </li>
-            <li className="nav-item">
+
+            {name &&( <li className="pt-3">
+              <LogoutComponent />
+              </li>
+            )}
+              
+            {!name &&(<li className="nav-item">
               <Link className="nav-link" href="/login">
                 <i className="fas fa-sign-in-alt px-0"></i> Login
               </Link>
-            </li>
+            </li>)}
+
           </ul>
         </div>
       </div>

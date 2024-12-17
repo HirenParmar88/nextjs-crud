@@ -6,17 +6,21 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { useState } from "react";
 import axios from "axios";
 import Pagination from "../pagination/pagination";
-  
+import { parseCookies } from 'nookies';
+
 function AddUser(props) {
   //const [userId, setUserId] = useState('')    //state
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const [userJwtToken, setUserJwtToken] = useState("");
+  
+  const cookies = parseCookies()
 
   //POST APIs for users
   const addUser = async (e) => {
     e.preventDefault();
+    const token=cookies.token;
+
     try {
       //console.log("user id ", userId)
       console.log("user Name :", userName);
@@ -28,11 +32,16 @@ function AddUser(props) {
       const res = await axios({
         url: "http://localhost:5000/users",
         method: "post",
+
         data: {
           username: userName,
           email: userEmail,
           password: userPassword
         },
+        headers:{
+          "Content-Type":"application/json",
+          authentication: `Bearer ${token}`
+        }
       });
       console.log("res", res.data);
       if ((res.data.success = true)) {
@@ -149,6 +158,13 @@ function ShowUser({ users, getUser }) {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
 
+  //PUT APIs for users 
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [updatedData, setUpdatedData] = useState({ name: "", email: "" });
+  
+  const cookies = parseCookies();
+  const token = cookies.token;
+
   //DELETE User
   const deleteUser = async (id) => {
     //e.preventDefault();
@@ -158,6 +174,10 @@ function ShowUser({ users, getUser }) {
       const res = await axios({
         url: `http://localhost:5000/users/${id}`,
         method: "delete",
+        headers:{
+          "Content-Type":"application/json",
+          Authorization:`Bearer ${token}`
+        }
       });
       console.log("res", res.data);
       //setUsers(res.data.users);
@@ -174,10 +194,6 @@ function ShowUser({ users, getUser }) {
       //alert("Network error: Unable to reach the server.");
     }
   };
-
-  //PUT APIs for users 
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [updatedData, setUpdatedData] = useState({ name: "", email: "" });
 
   const editUserModel = (user) => {
     console.log('edit dualogue open..')
@@ -200,6 +216,10 @@ function ShowUser({ users, getUser }) {
           name: userName,
           email: userEmail
         },
+        headers:{
+          "Content-Type":"application/json",
+          Authorization:`Bearer ${token}`
+        }
       });
       if (res.data.success) {
         alert("User updated successfully!");

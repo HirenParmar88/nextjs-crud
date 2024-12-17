@@ -28,11 +28,11 @@ export default function Dashboard() {
     <>
       <NavigationBar />
      
-      <Lazy />
+      {/* <Lazy /> */}
 
-      <MyApp />
+      {/* <MyApp /> */}
       
-      <div className="container mt-5 bg-light">
+      {/* <div className="container mt-5 bg-light">
         <br />
         <h2>Dashboard</h2>
         <br />
@@ -68,10 +68,10 @@ export default function Dashboard() {
           <br />
           <br />
         </ul>
-      </div>
+      </div> */}
 
       
-      <ImgGallary />
+      {/* <ImgGallary /> */}
       
 
       <div>

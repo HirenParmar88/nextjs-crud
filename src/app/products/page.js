@@ -8,6 +8,8 @@ import Pagination from '@/components/pagination/pagination.jsx';
 import axios from 'axios';
 import { useEffect,useState } from 'react';
 import { parseCookies } from 'nookies';
+import NavigationBar from '@/components/navigationBar/navigationBar';
+import Footer from '@/components/footer/Footer';
 
 function AddProductPage(  ){
   const [products, setProducts]= useState([]);
@@ -52,14 +54,20 @@ function AddProductPage(  ){
     setLimit(newLimit);
   }
   return(
+    <>
     <div>
+      <NavigationBar />
       <h2 className='text-center mb-4 mt-2'>Add Product </h2>
       <AddProduct getProduct={getProduct} />
       <Pagination onPageChange={handlePageChange}/>
       <ShowProduct products={products} getProduct={getProduct}/>
       <BtnHome/>
+      
     </div>
-   
+    <div>
+      <Footer />
+    </div>
+    </>
   );
 }
 export default  AddProductPage;

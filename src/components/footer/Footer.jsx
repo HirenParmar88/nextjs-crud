@@ -3,6 +3,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Style from'../../styles/Footer.module.css';
 
 function Footer({ dynamicLinks, showDate = true }) {
     const [currentDate, setCurrentDate] = useState('');
@@ -15,7 +16,7 @@ function Footer({ dynamicLinks, showDate = true }) {
     }, [showDate]);
 
     return (
-        <footer className="card-footer bg-light border-top py-3">
+        <footer className={Style.footerStyle}>
             <div className="container text-center">
                 <div className="footer-content">
                     <p className="mb-2 text-muted">@2024. All Rights Reserved.</p>

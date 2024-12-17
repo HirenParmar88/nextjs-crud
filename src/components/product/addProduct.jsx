@@ -4,15 +4,19 @@
 import axios from "axios";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { parseCookies } from 'nookies';
 
 function AddProduct(props) {
   //const [productId, setProductId] = useState('');
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productDescription, setProductDescription] = useState("");
+  const cookies = parseCookies()
 
   const addProduct = async (e) => {
     e.preventDefault();
+    const token=cookies.token;
+
     try {
       console.log("productName", productName);
       console.log("productPrice", productPrice);
@@ -26,7 +30,7 @@ function AddProduct(props) {
           description: productDescription,
         },
         headers: {
-          authentication: `Bearer ${localStorage.getItem('token')}`
+          authentication: `Bearer ${token}`
         }
       });
       console.log(res.data);
@@ -121,6 +125,8 @@ function AddProduct(props) {
 }
 
 function ShowProduct({ products, getProduct }) {
+  const cookies =parseCookies();
+  const token = cookies.token;
 
   //EDIT products
   const editProductModel=()=>{
@@ -135,7 +141,11 @@ function ShowProduct({ products, getProduct }) {
 
       const res = await axios({
         url:`http://localhost:5000/products/${id}`,
-        method: "delete"
+        method: "delete",
+        headers:{
+          "Content-Type":"application/json",
+          Authorization:`Bearer ${token}`
+        }
       });
       console.log('res',res.data)
 

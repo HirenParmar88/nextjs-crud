@@ -8,6 +8,8 @@ import Pagination from '@/components/pagination/pagination';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { parseCookies } from 'nookies';
+import NavigationBar from '@/components/navigationBar/navigationBar';
+import Footer from '@/components/footer/Footer';
 
 function AddAssessoryPage(){
   const [accessories, setAssessory]=useState([]);
@@ -56,11 +58,15 @@ function AddAssessoryPage(){
   return(
     <>
     <div>
+      <NavigationBar />
       <h2 className='text-center mb-4 mt-2'>Add Assessory Form </h2>
       <AddAssessory getAssessory={getAssessory}/>
       <Pagination onPageChange={handlePageChange}/>
       <ShowAssessory accessories={accessories} getAccessory={getAssessory}/>
       <BtnHome />
+    </div>
+    <div>
+      <Footer />
     </div>
     </>
   );

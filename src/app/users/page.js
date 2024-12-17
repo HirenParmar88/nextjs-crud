@@ -8,6 +8,9 @@ import Pagination from '@/components/pagination/pagination.jsx';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { parseCookies } from 'nookies';
+import NavigationBar from '@/components/navigationBar/navigationBar';
+import Footer from '@/components/footer/Footer';
+import styled from 'styled-components';
 
 function AddUserPage(){
   const [users, setUsers] = useState([])  //state var
@@ -15,10 +18,9 @@ function AddUserPage(){
   const [page, setPage]= useState(1);
   const [limit, setLimit]=useState(10);
   const cookies = parseCookies()
-
+  
   useEffect(() => {
     getUser(page, limit);
-    
     return () => {
       
     }
@@ -55,13 +57,37 @@ function AddUserPage(){
   return(
     <>
     <div>
+      <NavigationBar />
+      {/* <h3 align="right">Logged In : {name}</h3> */}
       <h2 className='text-center mb-4 mt-2'>Add User </h2>
-      <AddUser getUser={getUser}/>
-      <Pagination onPageChange={handlePageChange}/>
-      <ShowUser users={users} getUser={getUser} />
+     
+        <AddUser getUser={getUser}/>
+        <Pagination onPageChange={handlePageChange}/>
+        <ShowUser users={users} getUser={getUser} />
+      
       <BtnHome />
+      
     </div>
+    <PaddingFooter>
+      <Footer />
+    </PaddingFooter>
     </>
   );
 }
+
+//styled components
+const PaddingFooter = styled.div`
+  padding-top: 100px;
+`;
+
+
 export default  AddUserPage;
+
+// export function getServerSideProps(){
+//   return {
+//     props: {
+
+//     }
+//   }
+// }
+

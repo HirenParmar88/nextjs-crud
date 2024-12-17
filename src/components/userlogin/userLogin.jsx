@@ -38,7 +38,7 @@ function LoginComponents() {
         alert('successfully loggedIn');
         setCookie(null, "token", res.data.user.jwtToken)
         setCookie(null, "name", res.data.user.name)
-        router.push('/redirect')
+        router.push('/')
       } else {
         console.log("Invalid username or password.");
         alert('Invalid username or password')
@@ -57,7 +57,7 @@ function LoginComponents() {
   return (
     <>
       <div className="container mt-5">
-        <h1 className="text-center mb-4">Log In User</h1>
+        <h1 className="text-center mb-4">Log In Page</h1>
         <div className="row justify-content-center">
           <div className="col-md-6">
             {/* Username */}

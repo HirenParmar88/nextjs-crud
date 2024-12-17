@@ -5,16 +5,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { useState } from "react";
 import Pagination from "../pagination/pagination";
+import { parseCookies } from 'nookies';
 
 function AddAssessory(props) {
   //const [assessoryID, setAssessoryId]=useState('')
   const [assessoryName, setAssessoryName] = useState("")
   const [productId, setProductId] = useState('')
+  const cookies=parseCookies()
 
   //POST Apis for accessories
   const addAssessory = async (e) => {
     console.log("submit button clicked !!");
     e.preventDefault();
+    const token = cookies.token;
     try {
       console.log(" accessoriey Name :", assessoryName);
       console.log(" product id :", productId);
@@ -22,6 +25,10 @@ function AddAssessory(props) {
       const res = await axios({
         url: "http://localhost:5000/accessories",
         method: "post",
+        headers:{
+          Authorization:`Bearer ${token}`,
+          "Content-Type": 'application/json'
+        },
         data: {
           accessory_name: assessoryName,
           product_id: productId
@@ -108,12 +115,9 @@ function AddAssessory(props) {
 }
 
 function ShowAssessory({ accessories, getAccessory }) {
-  // const renderTable = () => {
-  //   console.log({accessories})
-  //   if(accessories?.length === 0) {
-  //     return <></>;
-  //   }
-  
+  const cookies=parseCookies()
+  const token=cookies.token;
+
   //DELETE APIs for Accessories
   const deleteAssessory=async(id)=>{
     console.log('delete btn clicked !!')
@@ -121,7 +125,11 @@ function ShowAssessory({ accessories, getAccessory }) {
       console.log("accessory id :", id)
       const res = await axios({
         url: `http://localhost:5000/accessories/${id}`,
-        method: "delete"
+        method: "delete",
+        headers:{
+          "Content-Type":"application/json",
+          Authorization:`Bearer ${token}`
+        }
       });
       console.log("res", res.data);
 
