@@ -27,12 +27,16 @@ export default function Dashboard() {
   return (
     <>
       <NavigationBar />
-     
-      {/* <Lazy /> */}
 
-      {/* <MyApp /> */}
+      <div>
+        <marquee direction="left" behavior="scroll"><h3>This is home page </h3></marquee>
+      </div>
+
+      <Lazy />
+
+      <MyApp />
       
-      {/* <div className="container mt-5 bg-light">
+      <div className="container mt-5 bg-light">
         <br />
         <h2>Dashboard</h2>
         <br />
@@ -68,10 +72,10 @@ export default function Dashboard() {
           <br />
           <br />
         </ul>
-      </div> */}
+      </div>
 
       
-      {/* <ImgGallary /> */}
+      <ImgGallary />
       
 
       <div>

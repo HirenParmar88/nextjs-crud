@@ -11,35 +11,43 @@ function AddProduct(props) {
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productDescription, setProductDescription] = useState("");
+  const [userId, setUserId]=useState("");
+
   const cookies = parseCookies()
 
   const addProduct = async (e) => {
     e.preventDefault();
     const token=cookies.token;
-
     try {
-      console.log("productName", productName);
-      console.log("productPrice", productPrice);
-      console.log("productDescription", productDescription);
+      console.log("productName :", productName);
+      console.log("productPrice :", productPrice);
+      console.log("productDescription :", productDescription);
+      console.log("userId :", userId);
+      console.log("Token from cookies:", token);
+      
       const res = await axios({
         url: "http://localhost:5000/products",
-        method: "post",
+        method: "POST",
         data: {
           product_name: productName,
           price: parseFloat(productPrice),
           description: productDescription,
+          userId: userId
         },
         headers: {
-          authentication: `Bearer ${token}`
+          "Content-Type": 'application/json',
+          Authorization: `Bearer ${token}`
         }
       });
-      console.log(res.data);
+      console.log("product data add res ", res.data);
       
-      if ((res.data.success = true)) {
+      if (res.data.success) {
         setProductName(""), //state
         setProductPrice(""),
         setProductDescription(""),
+        setUserId(""),
         props.getProduct();
+        alert("product added successfully.")
       } else {
         console.log("else part is executed !!");
       }
@@ -100,6 +108,18 @@ function AddProduct(props) {
                 value={productDescription}
                 className="form-control"
                 onChange={(e) => setProductDescription(e.target.value)}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>userID</td>
+            <td>
+              <input
+                type="text"
+                name="userId"
+                value={userId}
+                className="form-control"
+                onChange={(e) => setUserId(e.target.value)}
               />
             </td>
           </tr>
@@ -173,8 +193,6 @@ function ShowProduct({ products, getProduct }) {
               <th scope="col">ProductPrice</th>
               <th scope="col">description</th>
               <th scope="col">userId</th>
-              <th scope="col">createdAt</th>
-              <th scope="col">updatedAt</th>
               <th scope="col">operations</th>
             </tr>
           </thead>
@@ -188,8 +206,6 @@ function ShowProduct({ products, getProduct }) {
                 <td>{product.price}</td>
                 <td>{product.description}</td>
                 <td>{product.userId}</td>
-                <td>{product.createdAt}</td>
-                <td>{product.updatedAt}</td>
                 <td>
                   <button
                     // data-bs-toggle="modal"

@@ -11,6 +11,7 @@ import { parseCookies } from 'nookies';
 import NavigationBar from '@/components/navigationBar/navigationBar';
 import Footer from '@/components/footer/Footer';
 import styled from 'styled-components';
+import { decode } from 'jsonwebtoken';
 
 function AddUserPage(){
   const [users, setUsers] = useState([])  //state var
@@ -18,7 +19,8 @@ function AddUserPage(){
   const [page, setPage]= useState(1);
   const [limit, setLimit]=useState(10);
   const cookies = parseCookies()
-  
+  const { role } = decode(cookies.token);
+
   useEffect(() => {
     getUser(page, limit);
     return () => {
@@ -59,9 +61,14 @@ function AddUserPage(){
     <div>
       <NavigationBar />
       {/* <h3 align="right">Logged In : {name}</h3> */}
-      <h2 className='text-center mb-4 mt-2'>Add User </h2>
-     
-        <AddUser getUser={getUser}/>
+        {
+          role === 'admin' && (
+            <>
+              <h2 className='text-center mb-4 mt-2'>Add User </h2>
+              <AddUser getUser={getUser} />
+            </>
+          )
+        }
         <Pagination onPageChange={handlePageChange}/>
         <ShowUser users={users} getUser={getUser} />
       

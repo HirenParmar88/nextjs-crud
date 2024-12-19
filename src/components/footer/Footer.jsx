@@ -1,7 +1,6 @@
 // src/components/footer/Footer.jsx
 
 'use client';
-
 import React, { useState, useEffect } from 'react';
 import Style from'../../styles/Footer.module.css';
 
@@ -19,7 +18,7 @@ function Footer({ dynamicLinks, showDate = true }) {
         <footer className={Style.footerStyle}>
             <div className="container text-center">
                 <div className="footer-content">
-                    <p className="mb-2 text-muted">@2024. All Rights Reserved.</p>
+                    <p className="text-muted">@2024. All Rights Reserved.</p>
 
                     {/* Render dynamic links */}
                     <ul className="list-inline">

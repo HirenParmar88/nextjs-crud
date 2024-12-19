@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 function BtnHome(){
     return(
         <>
-        <div className='d-flex justify-content-center'>
+        <div className='d-flex'>
             <a href='/'><button className='btn btn-success mb-2 '>Back to Home</button></a>
         </div>
         

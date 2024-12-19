@@ -35,7 +35,7 @@ function LogoutComponent() {
       className="d-flex justify-content-center align-items-center"
       style={{ height: "0vh" }}
     >
-      <button type="button" className="btn btn-danger pt-2 pb-2 px-2" onClick={logOut}>
+      <button type="button" className="btn btn-success pt-2 pb-2 px-2" onClick={logOut}>
         Logout
       </button>
     </div>

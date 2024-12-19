@@ -1,9 +1,6 @@
-'use client'
+// src/components/pagination/pagination.jsx
 
-// src/components/pagination/pagination.js
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import "bootstrap/dist/js/bootstrap";
-// import "bootstrap/dist/js/bootstrap.bundle";
+"use client"
 import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -16,10 +13,9 @@ function Pagination({onPageChange}) {
   },[currentPage, pageLimit, onPageChange]);
 
   const currPageChangeState = (page) => {
-    //console.log('btn clicked....')
-    //setCounter(counter + 1);
     setCurrentPage(page.target.v);
   };
+  
   const pageLimitChange = (limit) => {
     console.log("current page", limit);
     setPageLimit(limit);

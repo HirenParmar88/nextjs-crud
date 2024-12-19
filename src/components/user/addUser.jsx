@@ -197,10 +197,6 @@ function ShowUser({ users, getUser }) {
 
   const editUserModel = (user) => {
     console.log('edit dualogue open..')
-    //setUserName(""), 
-    //setUserEmail(""),
-    //getUser();
-
     setSelectedUser(user);
     setUpdatedData({ name: user.name, email: user.email });
   };
@@ -255,9 +251,6 @@ function ShowUser({ users, getUser }) {
               <th scope="col">UserId</th>
               <th scope="col">UserName</th>
               <th scope="col">UserEmail</th>
-              <th scope="col">UserPassword</th>
-              <th scope="col">UserJwtToken</th>
-              <th scope="col">CreatedAt</th>
               <th scope="col">Operations</th>
             </tr>
           </thead>
@@ -268,9 +261,6 @@ function ShowUser({ users, getUser }) {
                 <td>{user.id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.password}</td>
-                <td>{user.jwtToken}</td>
-                <td>{user.createdAt}</td>
                 <td>
                   <button
                     // data-bs-toggle="modal"

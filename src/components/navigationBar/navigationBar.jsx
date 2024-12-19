@@ -42,7 +42,7 @@ function NavigationBar() {
             </li>
           </ul>
           <ul className="navbar-nav">
-            <li className="nav-nav-item pt-2 text-text-danger">
+            <li className="text-text-danger nav-nav-item pt-2 ">
               Welcome to { name }
             </li>
 

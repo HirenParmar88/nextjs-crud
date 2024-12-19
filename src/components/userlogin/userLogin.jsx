@@ -3,9 +3,10 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Dashboard from "@/app/page.js";
 import { redirect, useRouter } from "next/navigation"; 
 import { setCookie } from 'nookies'
+import BtnHome from "../backbtn/backButton";
+import styled from "styled-components";
 
 function LoginComponents() {
   const router = useRouter();
@@ -14,7 +15,7 @@ function LoginComponents() {
 
   //User Login
   const handleUserLogin = async (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     console.log("Login button clicked..!!");
     console.log('username :', username);
     console.log('password :', password);
@@ -54,6 +55,10 @@ function LoginComponents() {
     setPassword("");
   };
 
+  const BtnHomeStyle = styled.div`
+    align-items: left;
+    margin: 10px 0px 0px 10px;
+  `;
   return (
     <>
       <div className="container mt-5">
@@ -82,13 +87,14 @@ function LoginComponents() {
                 Password
               </label>
               <input
-                type="text"
+                type="password"
                 className="form-control"
                 id="login-password"
                 placeholder="Enter your password"
                 required
                 value={password}
                 onChange={e =>  setPassword(e.target.value)}
+          
               />
             </div>
 
@@ -112,6 +118,12 @@ function LoginComponents() {
           </div>
         </div>
       </div>
+
+      <BtnHomeStyle>
+      
+        <BtnHome />
+
+      </BtnHomeStyle>
     </>
   );
 }
